@@ -1,0 +1,31 @@
+# Default values for harbor.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+harbor:
+  expose:
+    type: ingress
+    tls:
+      enabled: true
+      certSource: secret
+      secret:
+        secretName: tls-registry.hibbard.dev
+     
+    ingress:
+      className: nginx
+      annotations:
+        ingress.kubernetes.io/ssl-redirect: "true"
+        ingress.kubernetes.io/proxy-body-size: "0"
+        nginx.ingress.kubernetes.io/ssl-redirect: "true"
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        cert-manager.io/cluster-issuer: letsencrypt-prod
+        nginx.ingress.kubernetes.io/whitelist-source-range: 10.0.0.0/8
+
+      hosts:
+        core: registry.hibbard.dev
+        notary: notary.hibbard.dev
+  persistence:
+    enabled: true
+
+  externalURL: https://registry.hibbard.dev
+  harborAdminPassword: admin

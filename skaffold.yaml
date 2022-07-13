@@ -1,0 +1,16 @@
+
+apiVersion: skaffold/v2beta25
+kind: Config
+
+deploy:
+  helm:
+    releases:
+      - name: harbor
+        chartPath: helm
+        valuesFiles:
+          - helm/values.yaml
+        
+        upgradeOnChange: true
+
+        createNamespace: true
+        namespace: harbor-system
