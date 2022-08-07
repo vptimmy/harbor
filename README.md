@@ -25,9 +25,9 @@ We will create a service account in Authentik to communicating with Harbor.
 
 Login into https://authentik.home.lab, go to the admin dashboard -> Directory -> Users and "Create Service Account".  I used the username "harbor-sa" as the username. Note the password and change it if you want.
 
-Now login into https://registry.home.lab with the harbor-sa account.  Click on harbor-sa in the upper right hand corner, then choose "User Profile".  The "CLI Secret" is going to be used for `docker login registry.home.lab` and also in Kubernetes registry secret you create below.
+Login into https://registry.home.lab with the harbor-sa account.  Click on harbor-sa in the upper right hand corner, then choose "User Profile".  The "CLI Secret" is going to be used for `docker login registry.home.lab` and also in Kubernetes registry secret you create below.
 
-We need a registry secret to hold a username and password so our deployments know how to communicate with Harbor.  I wanted this secret to be duplicated to all namespaces, so I used `kubed` to accomplish this.  If you don't like kubed, you can duplicate the secret to the namespaces manually.
+We need a registry secret to hold a username and password so our deployments know how to communicate with Harbor.  I wanted this secret to be duplicated to all namespaces, so I used `kubed` to accomplish this.  If you don't like kubed, you can duplicate the secret to the needed namespaces manually.
 
 ```
 kubectl create -n harbor-system secret docker-registry registry-harbor-sa \
@@ -36,7 +36,7 @@ kubectl create -n harbor-system secret docker-registry registry-harbor-sa \
 --docker-server=registry.home.lab 
 ```
 
-Now sync that secret to all namespaces by adding a kubed annotation
+Sync the secret to all namespaces by adding a kubed annotation
 `kubectl annotate -n harbor-system secrets registry-harbor-sa kubed.appscode.com/sync="true"`
 
 ## Login to repo
@@ -54,7 +54,7 @@ Use the credentials from above
     | **Access ID**     | Your docker ID - not email |
     | **Access Secret** | Your docker password       |
 
-4) Now go to Projects -> New Project 
+4) Go to Projects -> New Project 
     |                  |                 |
     | ---------------- | --------------- |
     | **Project Name** | dockerhub-proxy |
