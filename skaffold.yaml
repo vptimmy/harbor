@@ -11,6 +11,5 @@ deploy:
           - helm/values.yaml
         
         upgradeOnChange: true
-
         createNamespace: true
         namespace: harbor-system
