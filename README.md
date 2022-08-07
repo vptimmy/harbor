@@ -47,16 +47,22 @@ Use the credentials from above
 1) Login to https://registry.home.lab as a local db admin.
 2) Go to Registries
 3) Click "NEW ENDPOINT"
-| Provider      | Docker Hub                 |
-| Name          | dockerhub-proxy            | 
-| Access ID     | Your docker ID - not email |
-| Access Secret | Your docker password       |  
+    |                   |                            |
+    | ----------------- | -------------------------- |
+    | **Provider**      | Docker Hub                 |
+    | **Name**          | dockerhub-proxy            |
+    | **Access ID**     | Your docker ID - not email |
+    | **Access Secret** | Your docker password       |
+
 4) Now go to Projects -> New Project 
-| Project Name  | dockerhub-proxy            |
-| Proxy Cache   | on / true                  |
-| Endpoint      | dockerhub-proxy            |
+    |                  |                 |
+    | ---------------- | --------------- |
+    | **Project Name** | dockerhub-proxy |
+    | **Proxy Cache**  | on / true       |
+    | **Endpoint**     | dockerhub-proxy |
 
 Now do a docker pull.  A copy of that image appears in your registry!
+
 `docker docker pull registry.home.lab/dockerhub-proxy/library/python`
 
 
